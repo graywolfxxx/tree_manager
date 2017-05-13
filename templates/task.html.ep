@@ -7,7 +7,7 @@ tree and add nodes to it. Tree nodes should be stored in the MySQL database. Thu
 able to read them from the database to display the tree, and add new nodes to the tree upon user request.
 Each node should be identified by a unique node ID and have a parent P.</p>
 
-<p>Please consult the following UI sketch. (Feel free to make improvements.)</p>
+<p>Please consult the following UI sketch (feel free to make improvements).</p>
 
 <table class="table tableBlack">
     <tbody>
@@ -57,9 +57,9 @@ Each node should be identified by a unique node ID and have a parent P.</p>
     </tbody>
 </table>
 
-<p>Typing in parent node ID in .PID. box and clicking .Add. button should add a new node to the node
+<p>Typing in parent node ID in <b>PID</b> box and clicking <b>Add</b> button should add a new node to the node
 with that ID or produce and an error message in case invalid node ID is entered. Error message should
-be displayed immediately above .Add. button.</p>
+be displayed immediately above <b>Add</b> button.</p>
 
 <p>We are looking for re-usable code. You are strongly encouraged to "over engineer" this in order to show
 off your software architecture and designing skills. Assume that this abstract application will be the start
