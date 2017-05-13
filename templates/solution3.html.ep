@@ -1,0 +1,35 @@
+% layout 'default';
+
+<% #dumper(keys %{$d->{tree}->{root_list}->[0]}); %>
+
+<p class="lead">
+    This solution is based on my own library <a href="/js/simpletree.js" target="_blank">simpletree</a>. It is very
+    simple library which I prepared only for this task.
+</p>
+
+%= include 'solution_form', d => $d;
+
+<div>
+    <div style="padding:15px 0px 5px 0px;">Click by note to select it as a parent node</div>
+    <div id="simpletree_box" class="tree"></div>
+</div>
+
+<link rel="stylesheet" href="/css/simpletree.css">
+<script src="/js/simpletree.js"></script>
+<script type="text/javascript">
+    $('#simpletree_box').SimpleTree({
+        'expanded': 100,
+        'data': <%== $d->{tree_view_json} || '[]' %>,
+        'onChangeElem': function (data) {
+            $('#add_form #pid').val(data.selected.id);
+            if (!data.selected.pid || !(data.selected.pid * 1)) {
+                $('#add_form #btn_del').hide();
+                $('#add_form #id').val('');
+            } else {
+                $('#add_form #id').val(data.selected.id);
+                $('#add_form #btn_del').val("Remove node #" + data.selected.id);
+                $('#add_form #btn_del').show();
+            }
+        }
+    });
+</script>

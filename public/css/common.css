@@ -1,0 +1,85 @@
+/* Stylesheet of my site */
+
+html, body {
+    height: 100%;
+    min-height:100%;
+}
+body {
+    padding-top: 20px;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.navbar-default .navbar-nav > li > a:hover {
+    background-color: #f0f0f0;
+}
+.navbar-default .navbar-nav > li.active > a:hover {
+    background-color: #e0e0e0;
+}
+.navbar-header {
+    padding-right: 10px;
+}
+.container > .jumbotron, .jumbotron {
+    padding: 15px;
+    margin-bottom: 15px;
+    color: inherit;
+    background-color: #f4f4f4;
+}
+.jumbotron h1, .jumbotron .h1 {
+    font-size: 36px;
+}
+.jumbotron > h1, .jumbotron > h2, .jumbotron > h3 {
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.mywrapcontent {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -32px; /* Negative indent footer by it's height */
+}
+.myfooter, .myspacer {
+    height: 32px;
+}
+.myfooter .container .toph {
+    border-top: solid #e7e7e7 1px;
+    padding-top: 5px;
+}
+
+.tableBlack > tbody > tr > td,
+.tableBlack > tbody > tr > th,
+.tableBlack > tfoot > tr > td,
+.tableBlack > tfoot > tr > th,
+.tableBlack > thead > tr > td,
+.tableBlack > thead > tr > th {
+    border: 1px solid #000;
+}
+
+.btn-default {
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.btn-default:active:hover,
+.btn-default.active:hover,
+.btn-default:active:focus,
+.btn-default.active:focus,
+.btn-default:active.focus,
+.btn-default.active.focus {
+  background-color: #dddddd;
+  border-color: #a0a0a0;
+}
+
+.tree_view {
+    overflow: auto;
+    border: 1px solid silver;
+    min-width: 100px;
+    min-height: 100px;
+    display: inline-block;
+}
+

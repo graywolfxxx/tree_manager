@@ -1,0 +1,1 @@
+% layout 'default', d => {layout_data => {title => 'Page not found', header => 'Page not found', header_align => 'center'}};

@@ -1,0 +1,140 @@
+% layout 'default';
+
+<% #dumper(keys %{$d->{tree}->{root_list}->[0]}); %>
+
+<p class="lead">
+    This solution is based on the third party JS library <a href="https://www.jstree.com/" target="_blank">jsTree</a>
+    and on <strong>AJAX</strong> calls.
+</p>
+
+%= include 'solution_form', d => $d;
+
+<div>
+    <div style="padding:15px 0px 5px 0px;">Click by note to select it as a parent node</div>
+    <div id="tree_view_box" class="tree_view"></div>
+</div>
+
+<link rel="stylesheet" href="/js/jstree/themes/default/style.min.css" />
+<script type="text/javascript" src="/js/jstree/jstree.min.js"></script>
+<script type="text/javascript">
+    function hide_error() {
+        $('.alert-danger').hide();
+    }
+
+    function show_error(err) {
+        var err_list = [];
+        if (typeof err == 'string') {
+            err_list.push(err);
+        } else if (err instanceof Array) {
+            err_list = err_list.concat(err);
+        } else if (typeof err == 'object') {
+            for(var k in err) {
+                if (!err.hasOwnProperty(k)) {
+                    continue;
+                } else if (typeof err[k] == 'string') {
+                    err_list.push(err[k]);
+                } else if (err[k] instanceof Array) {
+                    err_list = err_list.concat(err[k]);
+                }
+            }
+        }
+        if (err_list.length) {
+            $('.alert-danger').show();
+            $('.alert-danger .alert-mycontent').html('<ul><li>' + err_list.join('</li><li>') + '</li></ul>');
+        } else {
+            $('.alert-danger').hide();
+        }
+    }
+
+    function set_handlers() {
+        var oForm = $('#add_form');
+        oForm.submit(function(e) {
+            e.preventDefault();
+            hide_error();
+            var oJstree = $('#tree_view_box').jstree(true);
+            var nodes = oJstree.get_top_selected(true);
+            if (!nodes || !nodes.length) {
+                return;
+            }
+            var act = oForm.find('#action').val() || '';
+            var post_data = {};
+            $.each(oForm.serializeArray(), function(_, kv) {
+                if (post_data.hasOwnProperty(kv.name)) {
+                    post_data[kv.name] = $.makeArray(post_data[kv.name]);
+                    post_data[kv.name].push(kv.value);
+                } else {
+                    post_data[kv.name] = kv.value;
+                }
+            });
+            if (act == 'add') {
+                $.post('/api/v1/add_node/', post_data)
+                    .done(function(data) {
+                        if (!data) {
+                            return;
+                        } else if (data.error) {
+                            show_error(data.error);
+                        } else if (data.node) {
+                            oJstree.create_node(nodes[0].id, data.node);
+                            hide_error();
+                        }
+                    })
+                    .fail(function(data) {
+                        show_error("Error during request [/api/v1/add_node/]");
+                    });
+            } else if (act == 'del') {
+                $.post('/api/v1/del_node/', post_data)
+                    .done(function(data) {
+                        if (!data) {
+                            return;
+                        } else if (data.error) {
+                            show_error(data.error);
+                        } else if (data.status == 'OK') {
+                            oJstree.delete_node(nodes[0]);
+                            hide_error();
+                        }
+                    })
+                    .fail(function(data) {
+                        show_error("Error during request [/api/v1/del_node/]");
+                    });
+            }
+        });
+    }
+
+    $('#tree_view_box')
+        .on("changed.jstree", function (e, data) {
+            if (data.selected.length) {
+                var node = data.instance.get_node(data.selected[0]);
+                $('#add_form #pid').val(node.id);
+                if (node.parent === '#') {
+                    $('#add_form #btn_del').hide();
+                    $('#add_form #id').val('');
+                } else {
+                    $('#add_form #id').val(node.id);
+                    $('#add_form #btn_del').val("Remove node #" + node.id);
+                    $('#add_form #btn_del').show();
+                }
+            }
+        });
+
+    $.get('/api/v1/get_tree/')
+        .done(function(data) {
+            if (!data) {
+                return;
+            } else if (data.error) {
+                show_error(data.error);
+            } else if (data.tree) {
+                $('#tree_view_box').jstree({
+                    'core': {
+                        'data': data.tree,
+                        'check_callback' : function (operation, node, node_parent, node_position, more) {
+                            return true;
+                        }
+                    }
+                });
+                set_handlers();
+            }
+        })
+        .fail(function(data) {
+            show_error("Error during request [/api/v1/get_tree/]");
+        });
+</script>

@@ -1,0 +1,39 @@
+% layout 'default';
+
+<% #dumper(keys %{$d->{tree}->{root_list}->[0]}); %>
+
+<p class="lead">
+    This solution is based on the third party JS library <a href="https://www.jstree.com/" target="_blank">jsTree</a>.
+</p>
+
+%= include 'solution_form', d => $d;
+
+<div>
+    <div style="padding:15px 0px 5px 0px;">Click by note to select it as a parent node</div>
+    <div id="tree_view_box" class="tree_view"></div>
+</div>
+
+<link rel="stylesheet" href="/js/jstree/themes/default/style.min.css" />
+<script type="text/javascript" src="/js/jstree/jstree.min.js"></script>
+<script type="text/javascript">
+    $('#tree_view_box')
+        .on("changed.jstree", function (e, data) {
+            if (data.selected.length) {
+                var node = data.instance.get_node(data.selected[0]);
+                $('#add_form #pid').val(node.id);
+                if (node.parent === '#') {
+                    $('#add_form #btn_del').hide();
+                    $('#add_form #id').val('');
+                } else {
+                    $('#add_form #id').val(node.id);
+                    $('#add_form #btn_del').val("Remove node #" + node.id);
+                    $('#add_form #btn_del').show();
+                }
+            }
+        })
+        .jstree({
+            'core': {
+                'data': <%== $d->{tree_view_json} || '[]' %>
+            }
+        });
+</script>

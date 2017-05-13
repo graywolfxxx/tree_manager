@@ -1,0 +1,71 @@
+% layout 'default';
+
+<p><i>Programming Assignment</i></p>
+
+<p>Your task is to write a web based application that allows the user to view an existing, initially empty,
+tree and add nodes to it. Tree nodes should be stored in the MySQL database. Thus, your program should be
+able to read them from the database to display the tree, and add new nodes to the tree upon user request.
+Each node should be identified by a unique node ID and have a parent P.</p>
+
+<p>Please consult the following UI sketch. (Feel free to make improvements.)</p>
+
+<table class="table tableBlack">
+    <tbody>
+        <tr>
+            <th class="text-center">
+                <h3 style="font-weight: bold;">Tree Manager</h3>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <h4 style="margin-top: 10px;">Current Tree:</h4>
+                <table class="table tableBlack text-nowrap" style="background-color: transparent;">
+                    <tbody>
+                        <tr>
+                            <th>Depth</th>
+                            <th colspan="5" class="text-center">Tree Nodes</th>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td colspan="5" class="text-center">[P: NONE ID: 1]</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td colspan="3" class="text-center">[P: 1 ID: 2]</td>
+                            <td colspan="2" class="text-center">[P: 1 ID: 3]</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td colspan="2" class="text-center" style="border-right: 0;">[P: 2 ID: 4]</td>
+                            <td colspan="2" class="text-center" style="border-left: 0;">[P: 2 ID: 5]</td>
+                            <td colspan="1" class="text-center" >[P: 3 ID: 6]</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td colspan="1" class="text-center" style="border-right: 0;">[P: 5 ID: 7]</td>
+                            <td colspan="1" class="text-center" style="border-right: 0; border-left: 0;">[P: 5 ID: 8]</td>
+                            <td colspan="1" class="text-center" style="border-right: 0; border-left: 0;">[P: 5 ID: 9]</td>
+                            <td colspan="1" class="text-center" style="border-left: 0;">[P: 5 ID: 10]</td>
+                            <td colspan="1" class="text-center" >[P: 6 ID: 11]</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Add Node To: <input type="text" value="PID" /></h4>
+                <button type="button" class="btn btn-primary btn-md">Add</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Typing in parent node ID in .PID. box and clicking .Add. button should add a new node to the node
+with that ID or produce and an error message in case invalid node ID is entered. Error message should
+be displayed immediately above .Add. button.</p>
+
+<p>We are looking for re-usable code. You are strongly encouraged to "over engineer" this in order to show
+off your software architecture and designing skills. Assume that this abstract application will be the start
+of a large scale application and is intended to serve the basis for other tree-like implementations.</p>
+
+<p>If pressed for time, feel free to use comments to explain what you would do in a real scenario.</p>
+
+<p>Provide all code, schema and build instructions to be able to run application outside your environment.</p>
+

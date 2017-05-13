@@ -1,0 +1,28 @@
+<form id="add_form" method="POST" enctype="multipart/form-data" style="paddinggg:0px; marginnn:0px;" class="form-horizontal" role="form">
+    <input type="hidden" id="action" name="action" value="add" />
+    <input type="hidden" id="id" name="id" value="" />
+    <div class="form-group">
+        <label for="pid" class="control-label col-sm-2" style="text-align: left;">Add node to</label>
+        <div class="col-sm-5">
+            <input class="form-control" type="text" id="pid" name="pid" value="<%= $d->{input_data} && $d->{input_data}->{pid} || '' %>" pattern="[0-9]+" placeholder="Parent Id" />
+            <% if ($d->{errors} && $d->{errors}->{pid}) { %>
+                <div class="err" style="display:inline-block;"><sup>*</sup><%= $d->{errors}->{pid} %></div>
+            <% } %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name" class="control-label col-sm-2" style="text-align: left;">Node name</label>
+        <div class="col-sm-5">
+            <input class="form-control" type="text" id="name" name="name" value="<%= $d->{input_data} && $d->{input_data}->{name} || '' %>" placeholder="Name" />
+            <% if ($d->{errors} && $d->{errors}->{name}) { %>
+                <div class="err" style="display:inline-block;"><sup>*</sup><%= $d->{errors}->{name} %></div>
+            <% } %>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+            <input class="btn btn-primary btn-md" type="submit" id="btn_add" value="Add node" onclick="$('#add_form #action').val('add'); return true;" />
+            <input class="btn btn-danger btn-md" type="submit" id="btn_del" value="Remove" onclick="if (confirm('Do you want to delete: ' + $('#add_form #id').val())) {$('#add_form #action').val('del'); return true;} return false;" style="display:none;" />
+        </div>
+    </div>
+</form>

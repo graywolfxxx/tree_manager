@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= $d && $d->{layout_data}->{title} || title || '' %></title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/css/common.css" type="text/css" />
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="mywrapcontent">
+            <div class="container">
+                <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <% my $activ_menu = $d && $d->{layout_data}->{activ_menu} || ''; %>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mycollapse" aria-expanded="false">
+                            <span class="sr-only">Nav</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="/" class="navbar-brand" style="font-weight:bold; color:#C30;">Tree Manager</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-mycollapse">
+                        <ul class="nav navbar-nav">
+                            <li class="<%= $activ_menu eq 'solution1' ? 'active' : '' %>"><a href="/">Solution #1</a></li>
+                            <li class="<%= $activ_menu eq 'solution2' ? 'active' : '' %>"><a href="/solution/2/">Solution #2</a></li>
+                            <li class="<%= $activ_menu eq 'solution3' ? 'active' : '' %>"><a href="/solution/3/">Solution #3</a></li>
+                            <li class="<%= $activ_menu eq 'task' ? 'active' : '' %>"><a href="/task/">Task</a></li>
+                        </ul>
+                    </div>
+                </div>
+                </nav>
+                <div>
+                    <% if ($d->{layout_data} && $d->{layout_data}->{header}) { %>
+                        <h1 class="<%= ($d->{layout_data}->{header_align} || '') eq 'center' ? 'text-center' : '' %>">
+                            <%= $d->{layout_data}->{header} // ''; %>
+                        </h1>
+                    <% } %>
+                    <% my $has_errors = $d->{errors} && $d->{errors}->{COMMON} && @{$d->{errors}->{COMMON}} ? 1 : 0; %>
+                    <div class="alert alert-danger" style="<%= $has_errors ? '' : 'display:none;'; %>">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Errors:</strong>
+                        <div class="alert-mycontent">
+                            <% if ($has_errors) { %>
+                                <ul><li><%== join('</li><li>', @{$d->{errors}->{COMMON}}); %></li></ul>
+                            <% } %>
+                        </div>
+                    </div>
+                    <%= content %>
+                </div>
+            </div>
+            <div class="myspacer"></div>
+        </div>
+
+        <div class="myfooter">
+            <div class="container">
+                <div class="toph">
+                    <footer>
+                    <div class="pull-left">Designed by <a href="https://linkedin.com/in/sergey-nozhkin-18699116" target="_blank">Sergey Nozhkin</a></div>
+                    <div class="pull-right">&copy; 2016 Tree Manager & Co.</div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
