@@ -1,13 +1,11 @@
 % layout 'default';
 
-<p><i>Programming Assignment</i></p>
-
-<p>Your task is to write a web based application that allows the user to view an existing, initially empty,
+<p class="lead">Your task is to write a web based application that allows the user to view an existing, initially empty,
 tree and add nodes to it. Tree nodes should be stored in the MySQL database. Thus, your program should be
 able to read them from the database to display the tree, and add new nodes to the tree upon user request.
 Each node should be identified by a unique node ID and have a parent P.</p>
 
-<p>Please consult the following UI sketch (feel free to make improvements).</p>
+<p class="lead">Please consult the following UI sketch (feel free to make improvements).</p>
 
 <table class="table tableBlack">
     <tbody>
@@ -19,37 +17,25 @@ Each node should be identified by a unique node ID and have a parent P.</p>
         <tr>
             <td>
                 <h4 style="margin-top: 10px;">Current Tree:</h4>
-                <table class="table tableBlack text-nowrap" style="background-color: transparent;">
-                    <tbody>
-                        <tr>
-                            <th>Depth</th>
-                            <th colspan="5" class="text-center">Tree Nodes</th>
-                        </tr>
-                        <tr>
-                            <td>0</td>
-                            <td colspan="5" class="text-center">[P: NONE ID: 1]</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td colspan="3" class="text-center">[P: 1 ID: 2]</td>
-                            <td colspan="2" class="text-center">[P: 1 ID: 3]</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td colspan="2" class="text-center" style="border-right: 0;">[P: 2 ID: 4]</td>
-                            <td colspan="2" class="text-center" style="border-left: 0;">[P: 2 ID: 5]</td>
-                            <td colspan="1" class="text-center" >[P: 3 ID: 6]</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td colspan="1" class="text-center" style="border-right: 0;">[P: 5 ID: 7]</td>
-                            <td colspan="1" class="text-center" style="border-right: 0; border-left: 0;">[P: 5 ID: 8]</td>
-                            <td colspan="1" class="text-center" style="border-right: 0; border-left: 0;">[P: 5 ID: 9]</td>
-                            <td colspan="1" class="text-center" style="border-left: 0;">[P: 5 ID: 10]</td>
-                            <td colspan="1" class="text-center" >[P: 6 ID: 11]</td>
-                        </tr>
-                    </tbody>
-                </table>
+<pre><code>
+Depth                                       Tree Nodes
+
+                                         ┌───────────────┐
+  0                                      │ P: None ID: 1 │
+                                         └───────┬───────┘
+                          ┌──────────────────────┴───────────────────────┐
+                   ┌──────┴─────┐                                 ┌──────┴─────┐
+  1                │ P: 1 ID: 2 │                                 │ P: 1 ID: 3 │
+                   └──────┬─────┘                                 └──────┬─────┘
+               ┌──────────┴──────────┐                                   │
+        ┌──────┴─────┐        ┌──────┴─────┐                      ┌──────┴─────┐
+  2     │ P: 2 ID: 4 │        │ P: 2 ID: 5 │                      │ P: 3 ID: 6 │
+        └────────────┘        └──────┬─────┘                      └──────┬─────┘
+               ┌─────────────┬───────┴─────┬─────────────┐               │
+        ┌──────┴─────┐┌──────┴─────┐┌──────┴─────┐┌──────┴──────┐ ┌──────┴──────┐
+  3     │ P: 5 ID: 7 ││ P: 5 ID: 8 ││ P: 5 ID: 9 ││ P: 5 ID: 10 │ │ P: 6 ID: 11 │
+        └────────────┘└────────────┘└────────────┘└─────────────┘ └─────────────┘
+</pre></code>
                 <h4>Add Node To: <input type="text" value="PID" /></h4>
                 <button type="button" class="btn btn-primary btn-md">Add</button>
             </td>
@@ -57,15 +43,15 @@ Each node should be identified by a unique node ID and have a parent P.</p>
     </tbody>
 </table>
 
-<p>Typing in parent node ID in <b>PID</b> box and clicking <b>Add</b> button should add a new node to the node
+<p class="lead">Typing in parent node ID in <b>PID</b> box and clicking <b>Add</b> button should add a new node to the node
 with that ID or produce and an error message in case invalid node ID is entered. Error message should
 be displayed immediately above <b>Add</b> button.</p>
 
-<p>We are looking for re-usable code. You are strongly encouraged to "over engineer" this in order to show
+<p class="lead">We are looking for re-usable code. You are strongly encouraged to "over engineer" this in order to show
 off your software architecture and designing skills. Assume that this abstract application will be the start
 of a large scale application and is intended to serve the basis for other tree-like implementations.</p>
 
-<p>If pressed for time, feel free to use comments to explain what you would do in a real scenario.</p>
+<p class="lead">If pressed for time, feel free to use comments to explain what you would do in a real scenario.</p>
 
-<p>Provide all code, schema and build instructions to be able to run application outside your environment.</p>
+<p class="lead">Provide all code, schema and build instructions to be able to run application outside your environment.</p>
 

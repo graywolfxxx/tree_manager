@@ -100,7 +100,7 @@ sub task {
     my $tpl_data = {
         layout_data => {
             title      => 'Tree Manager: Task',
-            header     => 'Tree Manager',
+            header     => 'Programming Assignment',
             activ_menu => 'task',
         },
     };
